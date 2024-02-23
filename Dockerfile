@@ -25,5 +25,13 @@ WORKDIR /app
 COPY --from=builder --exclude=$EXCLUDE . .
 RUN cargo build --release
 
-# Set the final image entrypoint
-ENTRYPOINT ["/app/target/release/chat-core"]
+# Final image stage
+FROM scratch
+
+WORKDIR /app
+
+# Copy the compiled binary from the builder stage
+COPY --from=builder /app/target/release/chat-core ./
+
+# Set the entrypoint
+ENTRYPOINT ["/app/chat-core"]
