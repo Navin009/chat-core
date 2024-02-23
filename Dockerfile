@@ -26,4 +26,4 @@ COPY --from=builder --exclude=$EXCLUDE . .
 RUN cargo build --release
 
 # Set the final image entrypoint
-ENTRYPOINT ["/app/target/release/your_app_name"]
+ENTRYPOINT ["/app/target/release/chat-core"]
